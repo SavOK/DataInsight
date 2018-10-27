@@ -89,7 +89,7 @@ class Table:
             keys[0] = rowNumColumn
         for x, i in enumerate(keys):
             if i == '':
-                keys[x] = f'MY_KEY_VAL_{x}'
+                keys[x] = 'MY_KEY_VAL_{0}'.format(x)
         if keysForDataInsightFlag:
             self._data_insight_keys(keys)
         return keys
@@ -156,7 +156,7 @@ class Table:
         if certifiedFlag:
             for D in [D for D in self.dataList if D["STATUS"].upper() == "CERTIFIED"]:
                 if not D[key] in count_dict:
-                    count_dict[D[key]] = {f'{key}': D[key],
+                    count_dict[D[key]] = {'{0}'.format(key): D[key],
                                           'NUMBER_CERTIFIED_APPLICATIONS': 1,
                                           'PERCENTAGE': 0}
                 else:
@@ -165,7 +165,7 @@ class Table:
         else:
             for D in self.dataList:
                 if not D[key] in count_dict:
-                    count_dict[D[key]] = {f'{key}': D[key],
+                    count_dict[D[key]] = {'{0}'.format(key): D[key],
                                           'NUMBER_CERTIFIED_APPLICATIONS': 1,
                                           'PERCENTAGE': 0}
                 else:
@@ -180,7 +180,7 @@ class Table:
             {'PERCENTAGE': percent(D['NUMBER_CERTIFIED_APPLICATIONS'], passed)}) for D in
             count_dict.values()]  # TODO parallel
 
-        L = sorted(count_dict.values(), key=itemgetter(f'{key}'))
+        L = sorted(count_dict.values(), key=itemgetter('{0}'.format(key)))
         return sorted(L, key=itemgetter('NUMBER_CERTIFIED_APPLICATIONS'), reverse=True)
 
 
