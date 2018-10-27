@@ -119,9 +119,9 @@ class Table:
                 del D[k]
 
         try:
-            oF = open(str(self.filePath), 'r', encoding='ISO-8859-1') # to make sure it works on strange excel output
+            oF = open(str(self.filePath), 'r', encoding='ISO-8859-1')  # to make sure it works on strange excel output
         except FileNotFoundError:
-            print(f"Cannot open file {str(self.filePath)}")
+            print("Cannot open file {0}".format(str(self.filePath)))
             raise
 
         headerLine = next(oF).strip()
@@ -150,7 +150,7 @@ class Table:
         :param certifiedFlag: Flag to include only certifiedFlags
         :return: Frequency table (list of dictionaries)
         """
-        assert key in self.keys, f"Cannot find key [{key}] in table"
+        assert key in self.keys, "Cannot find key [{0}] in table".format(key)
         count_dict = {}
         passed = 0
         if certifiedFlag:
@@ -193,12 +193,13 @@ def write_top_table(top_data: list, outFilePath: Path, topKey: str, topCount: in
     :param topCount: the number of lines to be outputted
     """
     assert len(top_data) > 1, 'List is empty'
-    assert topKey in top_data[0], f'Cannot find key [{topKey}]'
+    assert topKey in top_data[0], 'Cannot find key [{0}]'.format(topKey)
     with open(str(outFilePath), "w") as oFile:
-        header = f"TOP_{topKey};NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE"
+        header = "TOP_{0};NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE".format(topKey)
         oFile.write(header + '\n')
         for l in itt.islice(top_data, topCount):
-            strO = f"{l[topKey]};{l['NUMBER_CERTIFIED_APPLICATIONS']};{l['PERCENTAGE']:.1f}%"
+            strO = "{0};{1};{2:.1f}%".format(
+                l[topKey], l['NUMBER_CERTIFIED_APPLICATIONS'], l['PERCENTAGE'])
             oFile.write(strO + '\n')
 
 
