@@ -46,7 +46,7 @@ class Table:
             keepSet.intersection(dropSet)), "keep and drop lists are overlapping"  # test if sets are overlapping
         assert 0 == len(
             keepSet.difference(
-                keysSet)), f"Not all keep keys are found in table\n{keepSet}\n{keysSet}\n{keepSet.difference(keysSet)}"  # check if all keys are in table
+                keysSet)), "Not all keep keys are found in table"  # check if all keys are in table
         assert 0 == len(
             dropSet.difference(keysSet)), "Not all drop keys are found in table"  # check if all keys are in table
         assert len(keysSet) != len(dropSet), "drop all keys from table"  # check do not drop all elements from table
