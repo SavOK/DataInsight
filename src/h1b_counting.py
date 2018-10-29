@@ -6,6 +6,17 @@ from operator import itemgetter
 
 
 class Table:
+    """
+    Class Table reads list of dictionaries.
+    reads table in O(NumLines) used as much memory.
+    dropping columns O(NumLines*NumColumnsToDrop) dropping is very quick but saves a lot of memory
+
+    Attributes:
+    hardCodedkey: dictionary of the columns to keep only for the coding challenge to read old data from 2014
+    filePath: Path to the csv file
+    dataList: data from the list (list of dict)
+    keys: set of columns to keep
+    """
     hardCodedkey = {'OCCUPATIONS': {'SOC_NAME', 'LCA_CASE_SOC_NAME'},
                     'STATUS': {'CASE_STATUS', 'STATUS'},
                     'STATES': {'WORKSITE_STATE', 'LCA_CASE_WORKLOC1_STATE'}}
@@ -119,7 +130,7 @@ class Table:
                 del D[k]
 
         try:
-            oF = open(str(self.filePath), 'r', encoding='ISO-8859-1')  # to make sure it works on strange excel output
+            oF = open(str(self.filePath), 'r', encoding='ISO-8859-1')  # to make sure it works with strange excel output
         except FileNotFoundError:
             print("Cannot open file {0}".format(str(self.filePath)))
             raise
@@ -152,7 +163,7 @@ class Table:
         """
         assert key in self.keys, "Cannot find key [{0}] in table".format(key)
         count_dict = {}
-        passed = 0
+        passed = 0  # total number of certified applications
         if certifiedFlag:
             for D in [D for D in self.dataList if D["STATUS"].upper() == "CERTIFIED"]:
                 if not D[key] in count_dict:
