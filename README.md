@@ -1,7 +1,7 @@
 # The Problem
  Create frequency tables from the statistics provided by the US Department of Labor
   and its Office of Foreign Labor Certification Performance Data.
- The program should pick Top 10 occupations and states for certified visa 
+ The program should pick __top 10__ occupations and states for certified visa 
  applications.
  
  # The Approach 
@@ -9,7 +9,7 @@
  data structures (dictionaries, set, list) and modules (pathlib, itertools, operator).
  The unit tests were written with unittest module. 
  The program reads the text file and converts it in the 
- Table object (list of dictionaries) where each element of 
+ __Table__ object (list of dictionaries) where each element of 
  the list is the row from the input table and column names from the header lines of the table are used as keys for the dictionaries
  
  # How To Run
